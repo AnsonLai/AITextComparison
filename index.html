@@ -2352,43 +2352,6 @@
 
     </div>
 
-    <script>
-      $("#button").click(function () {
-        var area1 = $("#textarea1").val();
-        var area2 = $("#textarea2").val();
-
-        $.ajax({
-          method: "GET",
-          url: "https://az-func-gpt-3-openai-api.azurewebsites.net/text_compare_chat/",
-          data: {
-            "prompt1": area1,
-            "prompt2": area2
-          },
-          beforeSend: function () {
-            $('#loader').show();
-            $('#responsetable').hide();
-            $("#response").html("");
-          },
-          complete: function () {
-            $('#loader').hide();
-            $('#responsetable').show();
-          },
-          success: function (response) {
-            // Do something with the response
-            var json = JSON.parse(response)
-            $("#response").html(json["short explanation"])
-            $("#category").html(json["category"]);
-            $("#level").html(json["level"]);
-
-          },
-        });
-
-
-      });
-
-
-    </script>
-
   </main>
 
 
@@ -2417,6 +2380,44 @@
 
 
 </body>
+
+
+<script>
+  $("#button").click(function () {
+    var area1 = $("#textarea1").val();
+    var area2 = $("#textarea2").val();
+
+    $.ajax({
+      method: "GET",
+      url: "https://az-func-gpt-3-openai-api.azurewebsites.net/text_compare_chat/",
+      data: {
+        "prompt1": area1,
+        "prompt2": area2
+      },
+      beforeSend: function () {
+        $('#loader').show();
+        $('#responsetable').hide();
+        $("#response").html("");
+      },
+      complete: function () {
+        $('#loader').hide();
+        $('#responsetable').show();
+      },
+      success: function (response) {
+        // Do something with the response
+        var json = JSON.parse(response['text'])
+        $("#response").html(json["short explanation"])
+        $("#category").html(json["category"]);
+        $("#level").html(json["level"]);
+
+      },
+    });
+
+
+  });
+
+
+</script>
 
 <script>
   var dmp = new diff_match_patch();
