@@ -2288,6 +2288,23 @@
     <div class="container">
 
       <div class="row mt-5">
+        <div class="input-group">
+          <label class="input-group-text" for="select_lang">Language</label>
+          <select class="form-select" id="select_lang">
+            <option value="English" selected>English</option>
+            <option value="Japanese">Japanese</option>
+            <option value="Chinese (Simplified)">Chinese (Simplified)</option>
+            <option value="Chinese (Traditional)">Chinese (Traditional)</option>
+          </select>
+          <label class="input-group-text" for="select_model">Model</label>
+          <select class="form-select" id="select_model">
+            <option value="model-gpt-35-turbo-refleg-canadaeast" selected>GPT3.5</option>
+            <option value="model-gpt-4-refleg-canadaeast">GPT4</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="row mt-3">
         <p class="h4">Original Text</p>
       </div>
 
@@ -2387,13 +2404,17 @@
   $("#button").click(function () {
     var area1 = $("#textarea1").val();
     var area2 = $("#textarea2").val();
+    var model =  $("#select_model").val();
+    var lang = $("#select_lang").val();
 
     $.ajax({
       method: "POST",
       url: "https://az-func-gpt-3-openai-api.azurewebsites.net/text_compare_chat/",
       data: JSON.stringify({
         "prompt1": area1,
-        "prompt2": area2
+        "prompt2": area2,
+        "lang": lang,
+        "model": model
       }),
       beforeSend: function () {
         $('#loader').show();
