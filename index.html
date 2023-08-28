@@ -2389,12 +2389,12 @@
     var area2 = $("#textarea2").val();
 
     $.ajax({
-      method: "GET",
+      method: "POST",
       url: "https://az-func-gpt-3-openai-api.azurewebsites.net/text_compare_chat/",
-      data: {
+      data: JSON.stringify({
         "prompt1": area1,
         "prompt2": area2
-      },
+      }),
       beforeSend: function () {
         $('#loader').show();
         $('#responsetable').hide();
